@@ -1,6 +1,6 @@
 function Validator(options) {
 
-    // Object chứa các thẻ, nội dung mỗi thẻ là array các rule trên thẻ
+    // Object chứa các thẻ, mỗi thẻ là một array chứa các rule áp dụng cho thẻ đó
     const selectorRules = {}
     options.rules.forEach(rule => {
         if (selectorRules[rule.selector]) {
@@ -11,7 +11,7 @@ function Validator(options) {
         }
     })
     
-    // Function tìm thẻ parent theo selector và thẻ con element 
+    // Function tìm thẻ parent theo selector của parent và thẻ con element 
     function getParent(element, selector) {
         while (element.parentElement) {
             if (element.parentElement.matches(selector)) {
@@ -21,7 +21,7 @@ function Validator(options) {
         }
     }
 
-    // Function validate cho một thẻ nhập
+    // Function validate cho một thẻ
     function validation(selector, rules) {
         const inputElements = Array.from(formElement.querySelectorAll(selector));
         if (inputElements.length === 0) {
@@ -62,6 +62,7 @@ function Validator(options) {
         return errorMessage;
     }
 
+    // Get thẻ form để validate
     const formElement = document.querySelector(options.form);
 
     // Kiểm tra nếu lấy được form sẽ xử lý
